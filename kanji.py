@@ -7,6 +7,7 @@ st.set_page_config(layout="centered")
 
 # Set title heading
 st.title("Kanji App!")
+st.header("By Firas")
 
 # Create a function to break down a Japanese sentence into individual pieces
 def breakdown_sentence(sentence: str):
@@ -82,6 +83,9 @@ def breakdown_sentence(sentence: str):
     # Return the dataframe and raw API output
     return [df, response]
 
+# Section heading
+st.subheader("Sentence Input")
+
 # Create a user input
 st.text_input(
     label="Enter a Japanese sentence to break down...", 
@@ -128,10 +132,16 @@ with st.spinner('Loading...', show_time=True):
 
     )
 
+    # Table title
+    st.subheader("Components")
+
     # Print the df/raw output of the API sentence breakdown
     st.dataframe(
         styled_df, 
         hide_index=True)
+    
+    # Table title
+    st.subheader("Definitions")
     
     st.dataframe(
         df[['Base Word', 'Base Word (Hiragana)', 'Base Definitions']]
