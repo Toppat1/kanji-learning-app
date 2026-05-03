@@ -13,6 +13,7 @@ st.title("Kanji App!")
 st.header("By Firas")
 
 # Create a function to break down a Japanese sentence into individual pieces
+@st.cache_data
 def breakdown_sentence(sentence: str):
 
     # Specify JPDB.io API parameters
@@ -57,20 +58,27 @@ def breakdown_sentence(sentence: str):
 
     # Clean data to put into dataframe columns
     for index, token in enumerate(tokens):
+        # DEBUGGING STEP
+        # st.write(tokens)
     
+        # Set column cells with data that is always a single value, not a list
         df.loc[index, 'vocabulary_index'] = token[0]
         df.loc[index, 'sentence_position'] = token[1]
         df.loc[index, 'length'] = token[2]
 
+        # Select the sentence component by using its position index and length
         df.loc[index, 'section'] = sentence[token[1]: token[1] + token[2]]
 
+        # If the component has furigana, i.e. has kanji
         if token[3]:
             # DEBUGGING STEP
             # st.write("Currently working on:", token)
 
+            # Initialise the empty lists for kanjis and hiragana versions of kanjis
             df.at[index, 'kanji'] = []
             df.at[index, 'kanji_hiragana'] = []
 
+            # For each kanji list, append its kanji, hiragana version, connector (if exists), and endings of the word (conjugation)
             for element_index, element in enumerate(token[3]):
 
                 if isinstance(element, list):
@@ -90,26 +98,35 @@ def breakdown_sentence(sentence: str):
         # To prevent errors, create a meanings column and cells before assigning a list to it
         df.at[index, 'base_word_meanings'] = vocab[2]
 
+    # Fetch the machine translation of the Japanese sentence
+    translation = requests.post(url = "https://jpdb.io/api/v1/ja2en", json={"text":sentence}, headers=headers).json()['text']
+
     # Return the dataframe and raw API output
-    return [df, response]
+    return [df, response, translation]
 
 # Section heading
 st.subheader("Sentence Input")
 
 # Create a user input
-st.text_input(
+sentence = st.text_input(
     label="Enter a Japanese sentence to break down...", 
-    placeholder="呼吸だけを感じて。食べたよ。",
-    value="呼吸だけを感じて。食べたよ。",
-    key='sentence'
+    placeholder="リンゴを早く食べましたので、嬉しかった。",
+    value="リンゴを早く食べましたので、嬉しかった。",
+    key="sentence"
 )
+
+if "previous_sentence" not in st.session_state:
+    st.session_state["previous_sentence"] = sentence
+
+# Call the breakdown sentence function
+breakdown = breakdown_sentence(sentence)
 
 # Create a loading spinner while table loads
 with st.spinner('Loading...', show_time=True):
 
     # Create dataframe using inputted sentence broken down
     df = (
-        breakdown_sentence(st.session_state.sentence)[0]
+        breakdown[0]
         .rename(
             columns = {
                 'vocabulary_index':'Vocabulary Index',
@@ -160,3 +177,23 @@ with st.spinner('Loading...', show_time=True):
             **{'background-color': "#31f0ba99"}
         ), 
         hide_index=True)
+
+# Section heading
+st.subheader("Translation")
+st.text(f"{sentence}")
+
+# Clear the attempted translation if the sentence was changed#
+if sentence != st.session_state["previous_sentence"]:
+    st.session_state["attempted_translation"] = ""
+    st.session_state["previous_sentence"] = sentence
+
+# Allow the user to guess the meaning of their sentence from the breakdown
+attempted_translation = st.text_input(
+    label="What do you think this sentence is in English?",
+    placeholder="Enter translation...",
+)
+
+# Only reveal the translation button if the user tried to translate it themselves
+if attempted_translation:
+    if st.button(label="Reveal answer!"):
+        st.write(breakdown[2])
