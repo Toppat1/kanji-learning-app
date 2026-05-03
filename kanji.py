@@ -65,7 +65,8 @@ def breakdown_sentence(sentence: str):
         df.loc[index, 'section'] = sentence[token[1]: token[1] + token[2]]
 
         if token[3]:
-            st.write("Currently working on:", token)
+            # DEBUGGING STEP
+            # st.write("Currently working on:", token)
 
             df.at[index, 'kanji'] = []
             df.at[index, 'kanji_hiragana'] = []
