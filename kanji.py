@@ -19,7 +19,7 @@ headers = {
     "Authorization": f"Bearer {st.secrets['JPDB_API_KEY']}"
 }
 
-# Create a function to break down a Japanese sentence into individual pieces
+# Break down a Japanese sentence into individual components
 @st.cache_data
 def breakdown_sentence(sentence: str):
 
@@ -31,7 +31,7 @@ def breakdown_sentence(sentence: str):
     "text": sentence,
     "token_fields": ["vocabulary_index", "position", "length", "furigana"],
     "position_length_encoding": "utf32",
-    "vocabulary_fields": ["spelling", "reading", "meanings"]
+    "vocabulary_fields": ["spelling", "reading", "meanings", "part_of_speech"]
     }
 
     # Call the JPDB API to break down the JP sentence
@@ -51,6 +51,7 @@ def breakdown_sentence(sentence: str):
     df["connector"] = None
     df["ending"] = None
     df["base_word_meanings"] = None
+    df["part_of_speech"] = None
 
     df["vocabulary_index"] = None
     df["sentence_position"] = None
@@ -98,6 +99,8 @@ def breakdown_sentence(sentence: str):
         # To prevent errors, create a meanings column and cells before assigning a list to it
         df.at[index, 'base_word_meanings'] = vocab[2]
 
+        df.at[index, 'part_of_speech'] = vocab[3]
+
     # Return the dataframe and raw API output
     return df
 
@@ -109,7 +112,7 @@ def translate_jp(jp_sentence: str):
 # Section heading
 st.subheader("Input")
 
-# Create a user input
+# Create a text box for the user to input a Japanese sentence
 sentence = st.text_input(
     label="Enter a Japanese sentence to break down...", 
     placeholder="リンゴを早く食べましたので、嬉しかった。",
@@ -121,7 +124,7 @@ sentence = st.text_input(
 if "previous_sentence" not in st.session_state:
     st.session_state["previous_sentence"] = sentence
 
-# Create a loading spinner while table loads
+# Create df and a loading spinner while table loads
 with st.spinner('Loading...', show_time=True):
 
     # Create dataframe using inputted sentence broken down
@@ -140,7 +143,8 @@ with st.spinner('Loading...', show_time=True):
                 'ending':'Ending',
                 'base_word':'Base Word',
                 'base_word_hiragana':'Base Word (Hiragana)',
-                'base_word_meanings': 'Base Definitions'
+                'base_word_meanings': 'Base Definitions',
+                'part_of_speech':'Part of Speech'
             }
         )      
     )
@@ -148,7 +152,7 @@ with st.spinner('Loading...', show_time=True):
 
     # Style the dataframe with coloured columns!
     styled_df = (
-        df[['Component', 'Kanji', 'Kanji (Hiragana)', 'Connector', 'Ending']]   
+        df[['Component', 'Kanji', 'Kanji (Hiragana)', 'Connector', 'Ending', 'Part of Speech']]   
         .style.set_properties(
             subset=['Component'],
             **{'background-color': "#fff3b0b2"}
@@ -200,3 +204,21 @@ attempted_translation = st.text_input(
 if attempted_translation:
     if st.button(label="Reveal answer!"):
         st.write(translated_sentence)
+
+sentence_db = pd.read_csv(r'sentence_data.csv')
+
+cleaned_sentence_db = (
+    sentence_db.groupby('jp')
+    ['eng']
+    .apply(list)
+    .reset_index()
+)
+
+# st.dataframe(cleaned_sentence_db.sample(n=10), hide_index=True)
+
+kanji_search = st.text_input(
+    label='Sentence Searcher',
+    placeholder='Enter kanji...'
+)
+
+st.dataframe(cleaned_sentence_db[cleaned_sentence_db['jp'].str.contains(kanji_search)], hide_index=True)
