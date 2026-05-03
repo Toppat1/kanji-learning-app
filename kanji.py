@@ -85,8 +85,8 @@ def breakdown_sentence(sentence: str):
 # Create a user input
 st.text_input(
     label="Enter a Japanese sentence to break down...", 
-    placeholder="リンゴを早く食べましたので、嬉しかった。玉が盗まれた。",
-    value="リンゴを早く食べましたので、嬉しかった。玉が盗まれた。",
+    placeholder="リンゴを早く食べましたので、嬉しかった。",
+    value="リンゴを早く食べましたので、嬉しかった。",
     key='sentence'
 )
 
