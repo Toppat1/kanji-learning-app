@@ -43,6 +43,18 @@ def breakdown_sentence(sentence: str):
     # Initialise an empty dataframe
     df = pd.DataFrame()
 
+    # Initialise empty columns + names
+    df["section"] = None
+    df["kanji"] = None
+    df["kanji_hiragana"] = None
+    df["connector"] = None
+    df["ending"] = None
+    df["base_word_meanings"] = None
+
+    df["vocabulary_index"] = None
+    df["sentence_position"] = None
+    df["length"] = None
+
     # Clean data to put into dataframe columns
     for index, token in enumerate(tokens):
     
@@ -52,27 +64,22 @@ def breakdown_sentence(sentence: str):
 
         df.loc[index, 'section'] = sentence[token[1]: token[1] + token[2]]
 
-        if token[3] == None:
-            df.loc[index, 'base_kanji'] = None
-            df.loc[index, 'base_kanji_hiragana'] = None
-            df.loc[index, 'connector'] = None
-            df.loc[index, 'ending'] = None
-        else:
-            print(token[3])
+        if token[3]:
+            st.write("Currently working on:", token)
 
-            df.loc[index, 'base_kanji'] = token[3][0][0]
-            df.loc[index, 'base_kanji_hiragana'] = token[3][0][1]
+            df.at[index, 'kanji'] = []
+            df.at[index, 'kanji_hiragana'] = []
 
-            if len(token[3]) == 1:
-                df.loc[index, 'connector'] = None
-                df.loc[index, 'ending'] = None
-            
-            elif len(token[3]) > 2:
-                df.loc[index, 'connector'] = token[3][1]
-                df.loc[index, 'ending'] = token[3][-1]
-            else:
-                df.loc[index, 'connector'] = None
-                df.loc[index, 'ending'] = token[3][1] 
+            for element_index, element in enumerate(token[3]):
+
+                if isinstance(element, list):
+                    df.loc[index, 'kanji'].append(element[0])
+                    df.loc[index, 'kanji_hiragana'].append(element[1])
+                else:
+                    if element_index == len(token[3]) - 1:
+                        df.loc[index, 'ending'] = element
+                    elif element_index == len(token[3]) - 2:
+                        df.loc[index, 'connector'] = element  
 
     # Vocabulary part cleaning
     for index, vocab in enumerate(vocabulary):
@@ -80,7 +87,6 @@ def breakdown_sentence(sentence: str):
         df.loc[index, 'base_word_hiragana'] = vocab[1]
 
         # To prevent errors, create a meanings column and cells before assigning a list to it
-        df.loc[index, 'base_word_meanings'] = None
         df.at[index, 'base_word_meanings'] = vocab[2]
 
     # Return the dataframe and raw API output
@@ -92,8 +98,8 @@ st.subheader("Sentence Input")
 # Create a user input
 st.text_input(
     label="Enter a Japanese sentence to break down...", 
-    placeholder="リンゴを早く食べましたので、嬉しかった。",
-    value="リンゴを早く食べましたので、嬉しかった。",
+    placeholder="呼吸だけを感じて。食べたよ。",
+    value="呼吸だけを感じて。食べたよ。",
     key='sentence'
 )
 
@@ -109,8 +115,8 @@ with st.spinner('Loading...', show_time=True):
                 'sentence_position':'Sentence Position Index',
                 'length':'Length',
                 'section':'Component',
-                'base_kanji':'Kanji',
-                'base_kanji_hiragana':'Kanji (Hiragana)',
+                'kanji':'Kanji',
+                'kanji_hiragana':'Kanji (Hiragana)',
                 'connector':'Connector',
                 'ending':'Ending',
                 'base_word':'Base Word',
