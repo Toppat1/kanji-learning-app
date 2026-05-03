@@ -115,6 +115,7 @@ sentence = st.text_input(
     key="sentence"
 )
 
+# On first website run, set this to the current placeholder sentence
 if "previous_sentence" not in st.session_state:
     st.session_state["previous_sentence"] = sentence
 
@@ -182,7 +183,7 @@ with st.spinner('Loading...', show_time=True):
 st.subheader("Translation")
 st.text(f"{sentence}")
 
-# Clear the attempted translation if the sentence was changed#
+# Clear the attempted translation if the sentence was changed
 if sentence != st.session_state["previous_sentence"]:
     st.session_state["attempted_translation"] = ""
     st.session_state["previous_sentence"] = sentence
@@ -191,6 +192,7 @@ if sentence != st.session_state["previous_sentence"]:
 attempted_translation = st.text_input(
     label="What do you think this sentence is in English?",
     placeholder="Enter translation...",
+    key="attempted_translation"
 )
 
 # Only reveal the translation button if the user tried to translate it themselves
