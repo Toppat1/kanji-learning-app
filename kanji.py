@@ -12,6 +12,13 @@ st.set_page_config(
 st.title("Kanji App!")
 st.header("By Firas")
 
+# Authorisation info for JPDB API calls
+headers = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Authorization": f"Bearer {st.secrets['JPDB_API_KEY']}"
+}
+
 # Create a function to break down a Japanese sentence into individual pieces
 @st.cache_data
 def breakdown_sentence(sentence: str):
@@ -25,13 +32,6 @@ def breakdown_sentence(sentence: str):
     "token_fields": ["vocabulary_index", "position", "length", "furigana"],
     "position_length_encoding": "utf32",
     "vocabulary_fields": ["spelling", "reading", "meanings"]
-    }
-
-    # Authorisation info
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        "Authorization": f"Bearer {st.secrets['JPDB_API_KEY']}"
     }
 
     # Call the JPDB API to break down the JP sentence
@@ -98,14 +98,16 @@ def breakdown_sentence(sentence: str):
         # To prevent errors, create a meanings column and cells before assigning a list to it
         df.at[index, 'base_word_meanings'] = vocab[2]
 
-    # Fetch the machine translation of the Japanese sentence
-    translation = requests.post(url = "https://jpdb.io/api/v1/ja2en", json={"text":sentence}, headers=headers).json()['text']
-
     # Return the dataframe and raw API output
-    return [df, response, translation]
+    return df
+
+# Fetch the machine translation of the Japanese sentence
+@st.cache_data
+def translate_jp(jp_sentence: str):
+    return requests.post(url = "https://jpdb.io/api/v1/ja2en", json={"text":jp_sentence}, headers=headers).json()['text']
 
 # Section heading
-st.subheader("Sentence Input")
+st.subheader("Input")
 
 # Create a user input
 sentence = st.text_input(
@@ -119,15 +121,13 @@ sentence = st.text_input(
 if "previous_sentence" not in st.session_state:
     st.session_state["previous_sentence"] = sentence
 
-# Call the breakdown sentence function
-breakdown = breakdown_sentence(sentence)
-
 # Create a loading spinner while table loads
 with st.spinner('Loading...', show_time=True):
 
     # Create dataframe using inputted sentence broken down
     df = (
-        breakdown[0]
+        # Call the breakdown sentence function
+        breakdown_sentence(sentence)
         .rename(
             columns = {
                 'vocabulary_index':'Vocabulary Index',
@@ -144,6 +144,7 @@ with st.spinner('Loading...', show_time=True):
             }
         )      
     )
+    translated_sentence = translate_jp(sentence)
 
     # Style the dataframe with coloured columns!
     styled_df = (
@@ -198,4 +199,4 @@ attempted_translation = st.text_input(
 # Only reveal the translation button if the user tried to translate it themselves
 if attempted_translation:
     if st.button(label="Reveal answer!"):
-        st.write(breakdown[2])
+        st.write(translated_sentence)
