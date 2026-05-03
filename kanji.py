@@ -3,7 +3,10 @@ import pandas as pd
 import requests
 
 # Set page layout (centered or use whole screen with 'wide')
-st.set_page_config(layout="centered")
+st.set_page_config(
+    page_title="Kanji Learning App",
+    layout="centered"
+)
 
 # Set title heading
 st.title("Kanji App!")
