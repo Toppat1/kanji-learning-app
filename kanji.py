@@ -241,8 +241,6 @@ st.dataframe(sentence_db[sentence_db['jp'].str.contains(kanji_search)].sample(n=
 
 reviews = clean_jpdb_reviews('vocab_reviews.json')['cards_vocabulary_jp_en']
 
-reviews
-
 cards = pd.DataFrame({
     'spelling': [review['spelling'] for review in reviews],
     'reading': [review['reading'] for review in reviews],
@@ -251,13 +249,12 @@ cards = pd.DataFrame({
 
 # st.dataframe(cards, hide_index=True)
 
+# Input a sentence and return each component and whether you know it or not
 def known_sentence(test_sentence: str):
     return [
         breakdown_sentence(test_sentence)['section'], 
         breakdown_sentence(test_sentence)['section'].isin(cards['spelling']),
             ]
-    
-st.write(known_sentence('次はない'))
 
 for sentence in sentence_db['jp'].sample(n=5):
     x = pd.DataFrame({
