@@ -226,9 +226,10 @@ if attempted_translation:
 # Section heading
 st.subheader("Sentence Database")
 
-# Read in sentence database
+# Read in sentence database and reviews
 with st.spinner('Loading...', show_time=True):
     sentence_db = clean_sentence_db_data("sentence_data.csv")
+    reviews = clean_jpdb_reviews('vocab_reviews.json')['cards_vocabulary_jp_en']
 
 kanji_search = st.text_input(
     label='Sentence Searcher',
@@ -238,8 +239,6 @@ kanji_search = st.text_input(
 
 # Return n random rows from the sentence "database" with the specify word/kanji
 st.dataframe(sentence_db[sentence_db['jp'].str.contains(kanji_search)].sample(n=5), hide_index=True)
-
-reviews = clean_jpdb_reviews('vocab_reviews.json')['cards_vocabulary_jp_en']
 
 cards = pd.DataFrame({
     'spelling': [review['spelling'] for review in reviews],
