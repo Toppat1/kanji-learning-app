@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import requests
+import json
 
 # Set page layout (centered or use whole screen with 'wide')
 st.set_page_config(
@@ -109,13 +110,30 @@ def breakdown_sentence(sentence: str):
 def translate_jp(jp_sentence: str):
     return requests.post(url = "https://jpdb.io/api/v1/ja2en", json={"text":jp_sentence}, headers=headers).json()['text']
 
+# Fetch the example sentences with JP and EN translations
+@st.cache_data
+def clean_sentence_db_data(path: str):
+    return (
+        pd.read_csv(fr'{path}')
+        .groupby('jp')
+        ['eng']
+        .apply(list)
+        .reset_index()
+    )
+
+# Fetch the JPDB reviews data
+@st.cache_data
+def clean_jpdb_reviews(path: str):
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
 # Section heading
 st.subheader("Input")
 
 # Create a text box for the user to input a Japanese sentence
 sentence = st.text_input(
     label="Enter a Japanese sentence to break down...", 
-    placeholder="リンゴを早く食べましたので、嬉しかった。",
+    placeholder="Enter Japanese sentence...",
     value="リンゴを早く食べましたので、嬉しかった。",
     key="sentence"
 )
@@ -205,20 +223,49 @@ if attempted_translation:
     if st.button(label="Reveal answer!"):
         st.write(translated_sentence)
 
-sentence_db = pd.read_csv(r'sentence_data.csv')
+# Section heading
+st.subheader("Sentence Database")
 
-cleaned_sentence_db = (
-    sentence_db.groupby('jp')
-    ['eng']
-    .apply(list)
-    .reset_index()
-)
-
-# st.dataframe(cleaned_sentence_db.sample(n=10), hide_index=True)
+# Read in sentence database
+with st.spinner('Loading...', show_time=True):
+    sentence_db = clean_sentence_db_data("sentence_data.csv")
 
 kanji_search = st.text_input(
     label='Sentence Searcher',
-    placeholder='Enter kanji...'
+    placeholder='Enter kanji...',
+    value="面白い"
 )
 
-st.dataframe(cleaned_sentence_db[cleaned_sentence_db['jp'].str.contains(kanji_search)], hide_index=True)
+# Return n random rows from the sentence "database" with the specify word/kanji
+st.dataframe(sentence_db[sentence_db['jp'].str.contains(kanji_search)].sample(n=5), hide_index=True)
+
+reviews = clean_jpdb_reviews('vocab_reviews.json')['cards_vocabulary_jp_en']
+
+reviews
+
+cards = pd.DataFrame({
+    'spelling': [review['spelling'] for review in reviews],
+    'reading': [review['reading'] for review in reviews],
+    'recent_grade': [review['reviews'][-1]['grade'] for review in reviews]
+})
+
+# st.dataframe(cards, hide_index=True)
+
+def known_sentence(test_sentence: str):
+    return [
+        breakdown_sentence(test_sentence)['section'], 
+        breakdown_sentence(test_sentence)['section'].isin(cards['spelling']),
+            ]
+    
+st.write(known_sentence('次はない'))
+
+for sentence in sentence_db['jp'].sample(n=5):
+    x = pd.DataFrame({
+        'word': known_sentence(sentence)[0],
+        'known': known_sentence(sentence)[1]
+    })
+    if x['known'].all() == True:
+        st.write(sentence)
+    else:
+        st.write("You don't know all of these:", sentence)
+        st.write(x)
