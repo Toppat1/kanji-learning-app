@@ -35,12 +35,14 @@ def breakdown_sentence(sentence: str):
     "vocabulary_fields": ["spelling", "reading", "meanings", "part_of_speech"]
     }
 
+    # ADDDDD RATE LIMIT CHECKING
+
     # Call the JPDB API to break down the JP sentence
-    response = requests.post(url, json=payload, headers=headers).json()
+    response = requests.post(url, json=payload, headers=headers)
 
     # Split output dictionary into Tokens and Vocabulary
-    tokens = response['tokens']
-    vocabulary = response['vocabulary']
+    tokens = response.json()['tokens']
+    vocabulary = response.json()['vocabulary']
 
     # Initialise an empty dataframe
     df = pd.DataFrame()
@@ -244,7 +246,8 @@ def known_sentence(test_sentence: str):
         breakdown_sentence(test_sentence)['section'].isin(cards['keyword']),
             ]
 
-for sentence in sentence_db['jp'].sample(n=100):
+# List 100 random sentences and whether I know each component
+for sentence in sentence_db['jp'].sample(n=10):
     x = pd.DataFrame({
         'word': known_sentence(sentence)[0],
         'known': known_sentence(sentence)[1]
