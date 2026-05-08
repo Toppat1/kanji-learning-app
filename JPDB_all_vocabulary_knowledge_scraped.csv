@@ -1,0 +1,589 @@
+keyword,status
+時,Locked
+信じる,Never forget
+けど,Never forget
+小さな,Never forget
+泣く,Locked
+僕ら,Never forget
+ない,Never forget
+いい,Never forget
+やる,Never forget
+なんて,Never forget
+ずっと,Never forget
+世界,Known (lvl 5)
+気持ち,Locked
+心,Never forget
+大きな,Never forget
+楽しい,Locked
+進む,Locked
+自由,Locked
+僕,Locked
+いつか,Due
+未来,Locked
+始まり,Locked
+夢見る,Locked
+その,Never forget
+私,Never forget
+そんな,Never forget
+ここ,Never forget
+自分,Locked
+じゃない,Never forget
+聞く,Known (lvl 5)
+まだ,Never forget
+ちょっと,Never forget
+本当,Known (lvl 6)
+言葉,Locked
+なん,Never forget
+まま,Known (lvl 5)
+いつも,Due
+歩く,Locked
+道,Locked
+始まる,Locked
+なんだ,Known (lvl 7)
+頑張る,Locked
+出会う,Locked
+どうか,Due
+大好き,Never forget
+つらい,Never forget
+想い,Locked
+あやふや,Due
+たかい,Never forget
+だった,Never forget
+お,Never forget
+知る,Locked
+中,Never forget
+ように,Due
+また,Never forget
+ながら,Known (lvl 6)
+いや,Never forget
+できる,Never forget
+そこ,Never forget
+ところ,Due
+何,Never forget
+目,Never forget
+今日,Never forget
+どこ,Never forget
+のように,Never forget
+こう,Never forget
+好き,Never forget
+みんな,Never forget
+かも,Never forget
+夜,Locked
+消える,Locked
+伝える,Locked
+大事,Locked
+じゃ,Never forget
+よね,Never forget
+やっぱり,Never forget
+ちゃんと,Never forget
+ありがとう,Never forget
+一つ,Never forget
+怖い,Locked
+ほら,Never forget
+感情,Locked
+熱い,Locked
+描く,Locked
+綺麗,Locked
+星,Locked
+なか,Never forget
+音楽,Locked
+居る,Locked
+繋がる,Locked
+舞う,Locked
+ときめき,Due
+語りあう,Locked
+デコボコ,Blacklisted
+する,Never forget
+それ,Never forget
+には,Never forget
+です,Never forget
+な,Never forget
+そう,Never forget
+これ,Never forget
+さん,Never forget
+という,Never forget
+もう,Never forget
+あの,Never forget
+だろう,Never forget
+来る,Known (lvl 6)
+人,Never forget
+なら,Never forget
+いく,Redundant
+わ,Never forget
+今,Never forget
+ような,Never forget
+出る,Never forget
+にも,Never forget
+どう,Never forget
+そして,Never forget
+のに,Never forget
+とか,Never forget
+ぞ,Never forget
+なの,Never forget
+声,Locked
+もらう,Never forget
+入る,Never forget
+ほど,Known (lvl 7)
+より,Never forget
+あれ,Never forget
+よく,Never forget
+おく,Due
+感じる,Locked
+強い,Locked
+うち,Known (lvl 7)
+どうして,Never forget
+あげる,Never forget
+続ける,Locked
+子,Never forget
+こちら,Never forget
+すぐに,Never forget
+教える,Locked
+やめる,Never forget
+よりも,Known (lvl 7)
+口,Never forget
+生きる,Never forget
+存在,Known (lvl 5)
+もちろん,Never forget
+そのまま,Known (lvl 5)
+覚える,Locked
+無理,Locked
+とても,Never forget
+どこか,Failed
+決める,Locked
+ほしい,New
+もの,Never forget
+なので,Never forget
+朝,Never forget
+不安,Locked
+求める,Locked
+ああ,Never forget
+はい,Never forget
+うん,Never forget
+みたい,Never forget
+大丈夫,Locked
+ちゃん,Never forget
+あっ,Never forget
+なんか,Never forget
+ください,Never forget
+なんだ,Never forget
+分かる,Locked
+まあ,Never forget
+ええ,Never forget
+えっ,Never forget
+すごい,Never forget
+なんで,Never forget
+そうだ,Never forget
+なんです,Never forget
+思い出す,Locked
+おい,Never forget
+ごめん,Never forget
+だったら,Never forget
+光,Locked
+なるほど,Never forget
+ううん,Never forget
+明日,Locked
+しかない,Never forget
+そこまで,Never forget
+痛い,Locked
+どうした,Never forget
+こいつ,Never forget
+記憶,Locked
+私たち,Never forget
+触れる,Locked
+負ける,Locked
+いきなり,Never forget
+静か,Locked
+届く,Locked
+ひどい,Never forget
+ごめんなさい,Never forget
+どうぞ,Never forget
+本気,Locked
+そういえば,Never forget
+おお,Never forget
+風,Locked
+いっぱい,Never forget
+どうも,Never forget
+素直,Locked
+よし,Never forget
+遠い,Locked
+暗い,Locked
+それでは,Never forget
+さすが,Never forget
+っけ,Never forget
+雨,Never forget
+隠れる,Locked
+人たち,Never forget
+迷う,Locked
+願う,Locked
+まだまだ,Never forget
+目指す,Locked
+遠く,Locked
+それまで,Never forget
+一歩,Locked
+いつまでも,New
+といえば,Never forget
+ほか,Never forget
+ねえ,Never forget
+もしかして,Never forget
+あれ,Never forget
+じゃん,Never forget
+んん,Never forget
+すみません,Never forget
+バカ,Never forget
+えっと,Never forget
+かわいい,Never forget
+２人,Never forget
+だよね,Never forget
+おいしい,Never forget
+いやいや,Never forget
+クラス,Never forget
+うわ,Never forget
+そうそう,Never forget
+そうだね,Never forget
+追いかける,Known (lvl 5)
+うれしい,Never forget
+へえ,Never forget
+辛い,Locked
+わあ,Never forget
+きれい,Never forget
+願い,Locked
+すっごい,Never forget
+なり,Blacklisted
+届ける,Locked
+つ,Never forget
+満たす,Locked
+３人,Never forget
+こんにちは,Never forget
+時計,Locked
+つまらない,Never forget
+日常,Locked
+いいね,Never forget
+転ぶ,Locked
+おめでとう,Never forget
+セット,Never forget
+挑戦,Locked
+はぁ,Never forget
+ふふ,Never forget
+すいません,Never forget
+抱きしめる,Locked
+フッ,Never forget
+ええっ,Never forget
+ってば,Never forget
+ていうか,Never forget
+あのね,Never forget
+うんうん,Never forget
+いやあ,Never forget
+ウソ,Never forget
+思いっきり,Known (lvl 5)
+ちっ,Never forget
+言い聞かせる,Locked
+えへへ,Never forget
+そうなんですか,Never forget
+いい子,Never forget
+沢山,Locked
+パンツ,Never forget
+いちばん,Never forget
+めっちゃ,Never forget
+温度,Locked
+きゃあ,Never forget
+愛しい,Locked
+よしよし,Never forget
+アニメ,Never forget
+不器用,Locked
+はじめまして,Never forget
+ラッキー,Never forget
+ハート,Never forget
+プライベート,Never forget
+ゆる,Blacklisted
+キレイ,Never forget
+じゃん,Never forget
+プリン,Never forget
+ありふれる,Locked
+ウッ,Never forget
+手をつなぐ,Locked
+あんなふうに,Never forget
+まえに,New
+ときめく,Due
+ぴょん,Never forget
+何も無い,Locked
+あかり,Never forget
+起きあがる,Locked
+じゃんけん,Never forget
+いいかげんにしろ,Never forget
+チェンジ,Never forget
+ジェットコースター,Never forget
+アンド,Never forget
+ドタバタ,Blacklisted
+せえの,Never forget
+いたいけ,Blacklisted
+ジャマ,Never forget
+おり,Blacklisted
+おっちょこちょい,Blacklisted
+ミラクル,Never forget
+チカラ,New
+名もない,Locked
+えがく,Redundant
+ヒカリ,Never forget
+確かめ,Locked
+スマッシュ,Never forget
+キモチ,Redundant
+ドリーム,Never forget
+エナジー,Never forget
+メリーゴーランド,Never forget
+メーン,Never forget
+ミライ,Never forget
+分かちあう,Locked
+プリティー,Never forget
+ウワアン,Never forget
+しまう,New
+し,Known (lvl 7)
+とは,Due
+何,Known (lvl 5)
+前,Locked
+考える,Locked
+いう,Never forget
+ため,Known (lvl 7)
+ではない,Known (lvl 7)
+たち,Never forget
+ただ,New
+違う,Locked
+よい,Never forget
+よう,Never forget
+出す,Known (lvl 5)
+しか,New
+わけ,Known (lvl 7)
+呼ぶ,Locked
+ばかり,New
+あと,New
+力,Locked
+見せる,Locked
+意味,Locked
+終わる,Locked
+始める,Locked
+何も,Known (lvl 5)
+日,New
+年,Locked
+それでも,New
+逃げる,Locked
+高い,Locked
+初めて,Locked
+べき,Known (lvl 5)
+いけない,Known (lvl 7)
+あまり,Known (lvl 7)
+すぐ,Known (lvl 7)
+先,Locked
+誰も,Locked
+選ぶ,Locked
+近く,Locked
+人,Never forget
+しっかり,New
+新しい,Locked
+大,Never forget
+生む,Locked
+なくなる,Known (lvl 6)
+毎日,Locked
+女,Never forget
+なに,Redundant
+胸,Locked
+へと,Due
+欲しい,Locked
+全部,Locked
+気がする,Locked
+優しい,Locked
+探す,Locked
+向ける,Locked
+目の前,Locked
+そろそろ,Known (lvl 7)
+色,Locked
+恥ずかしい,Locked
+面白い,Locked
+動かす,Locked
+起こる,Locked
+せっかく,Known (lvl 7)
+これ以上,Locked
+人生,Locked
+答え,Locked
+受け取る,Locked
+救う,Locked
+失敗,Locked
+伝わる,Locked
+弱い,Locked
+すっかり,Known (lvl 5)
+よろしく,Known (lvl 7)
+風,Locked
+成功,Locked
+輝く,Locked
+どんどん,New
+それにしても,Known (lvl 7)
+希望,Locked
+超える,Locked
+後悔,Locked
+予想,Locked
+支える,Locked
+その日,Locked
+というより,Known (lvl 6)
+日々,Known (lvl 5)
+時には,Locked
+ぶり,Due
+大きくなる,New
+将来,Locked
+見つめる,Locked
+なんだか,Due
+気付く,Locked
+やがる,Known (lvl 5)
+響く,Locked
+手紙,Locked
+そう言う,Locked
+限界,Locked
+お互い,Locked
+そば,New
+鳴る,Locked
+人,Never forget
+いや,Due
+久しぶり,Locked
+思いつく,Locked
+やってみる,New
+爆発,Locked
+つかむ,New
+もしも,Locked
+物語,Locked
+太陽,Locked
+込める,Locked
+勇気,Locked
+染まる,Locked
+こっそり,Due
+目覚める,Locked
+あう,Due
+何もかも,Locked
+重なる,Locked
+湧く,Locked
+聴く,Locked
+おとなしい,Known (lvl 3)
+向き合う,Locked
+きっかけ,New
+べく,Due
+夢を見る,Locked
+叱る,Known (lvl 5)
+大事にする,Locked
+変わり,Locked
+どうしたらいい,New
+手を伸ばす,Locked
+溢れる,Locked
+貴方,Locked
+ぎゅっと,New
+問いかける,Locked
+輝き,Locked
+叶う,Locked
+針,Locked
+そこそこ,Known (lvl 7)
+ごまかす,New
+中学,Locked
+１人で,Locked
+叶える,Locked
+想う,Locked
+残酷,Locked
+ネタ,Known (lvl 6)
+おなか,Known (lvl 6)
+いじる,Due
+度,Locked
+さほど,Blacklisted
+あきらめる,New
+冒険,Locked
+止む,Locked
+情熱,Locked
+さえあれば,Known (lvl 6)
+モテる,Known (lvl 7)
+初めまして,Locked
+詰め込む,Locked
+待ち受ける,Locked
+おごる,Due
+花が咲く,Locked
+温もり,Locked
+繋がり,Locked
+急かす,Locked
+月明かり,Locked
+だらだら,Due
+おびえる,Due
+動きだす,Locked
+なじむ,Failed
+カニ,Due
+こころ,Redundant
+ほえる,Known (lvl 3)
+駆けだす,Locked
+いたむ,Known (lvl 7)
+ベタ,Due
+鳴り,Locked
+おそろい,Due
+くりかえす,Due
+あか,Blacklisted
+照れ臭い,Locked
+ウキウキ,Known (lvl 5)
+色鮮やか,Locked
+すりすり,Blacklisted
+嗚呼,Locked
+題名,Locked
+準備運動,Locked
+そうそうない,Known (lvl 5)
+ゆり,Blacklisted
+高まり,Locked
+よりよい,Due
+おしとやか,Due
+心が動く,Locked
+踊り出す,Locked
+チラ,Blacklisted
+イタイ,Blacklisted
+おさえつける,Locked
+結衣,Blacklisted
+大げさにする,Known (lvl 5)
+ごらく,Due
+ちい,Blacklisted
+の,Never forget
+に,Never forget
+よ,Never forget
+が,Never forget
+を,Never forget
+も,Never forget
+んだ,Never forget
+は,Never forget
+で,Never forget
+こと,Never forget
+夢,Never forget
+君,Locked
+なる,Never forget
+ある,Never forget
+飛ぶ,Locked
+だって,Never forget
+って,Never forget
+もっと,Never forget
+どんな,Never forget
+だ,Never forget
+行く,Locked
+さ,Never forget
+あなた,Never forget
+きっと,Never forget
+空,Locked
+と,Never forget
+から,Never forget
+見る,Never forget
+かな,Never forget
+一緒に,Never forget
+変わる,Locked
+いつ,Never forget
+笑う,Locked
+さあ,Never forget
+いる,Never forget
+この,Never forget
+だけ,Never forget
+まで,Never forget
+へ,Never forget
+だけど,Never forget
+いま,Redundant
+か,Never forget
+ね,Never forget
+思う,Never forget
+でも,Never forget
+言う,Never forget
+くれる,Never forget
+だから,Never forget
+ん,Never forget
+こんな,Never forget

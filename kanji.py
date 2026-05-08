@@ -121,12 +121,6 @@ def clean_sentence_db_data(path: str):
         .reset_index()
     )
 
-# Fetch the JPDB reviews data
-@st.cache_data
-def clean_jpdb_reviews(path: str):
-    with open(path, encoding='utf-8') as f:
-        return json.load(f)
-
 # Section heading
 st.subheader("Input")
 
@@ -229,7 +223,7 @@ st.subheader("Sentence Database")
 # Read in sentence database and reviews
 with st.spinner('Loading...', show_time=True):
     sentence_db = clean_sentence_db_data("sentence_data.csv")
-    reviews = clean_jpdb_reviews('vocab_reviews.json')['cards_vocabulary_jp_en']
+    cards = pd.read_csv('JPDB_all_vocabulary_knowledge_scraped.csv')
 
 kanji_search = st.text_input(
     label='Sentence Searcher',
@@ -240,11 +234,6 @@ kanji_search = st.text_input(
 # Return n random rows from the sentence "database" with the specify word/kanji
 st.dataframe(sentence_db[sentence_db['jp'].str.contains(kanji_search)].sample(n=5), hide_index=True)
 
-cards = pd.DataFrame({
-    'spelling': [review['spelling'] for review in reviews],
-    'reading': [review['reading'] for review in reviews],
-    'recent_grade': [review['reviews'][-1]['grade'] for review in reviews]
-})
 
 # st.dataframe(cards, hide_index=True)
 
@@ -252,16 +241,16 @@ cards = pd.DataFrame({
 def known_sentence(test_sentence: str):
     return [
         breakdown_sentence(test_sentence)['section'], 
-        breakdown_sentence(test_sentence)['section'].isin(cards['spelling']),
+        breakdown_sentence(test_sentence)['section'].isin(cards['keyword']),
             ]
 
-for sentence in sentence_db['jp'].sample(n=5):
+for sentence in sentence_db['jp'].sample(n=100):
     x = pd.DataFrame({
         'word': known_sentence(sentence)[0],
         'known': known_sentence(sentence)[1]
     })
     if x['known'].all() == True:
-        st.write(sentence)
+        st.write("You know everything in this sentence!", sentence)
     else:
         st.write("You don't know all of these:", sentence)
         st.write(x)
