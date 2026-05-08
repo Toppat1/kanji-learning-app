@@ -40,6 +40,9 @@ def breakdown_sentence(sentence: str):
     # Call the JPDB API to break down the JP sentence
     response = requests.post(url, json=payload, headers=headers)
 
+    if response.status_code == 429:
+        st.write("Status code", response.status_code, ", slow down")
+
     # Split output dictionary into Tokens and Vocabulary
     tokens = response.json()['tokens']
     vocabulary = response.json()['vocabulary']
@@ -166,7 +169,7 @@ with st.spinner('Loading...', show_time=True):
 
     # Style the dataframe with coloured columns!
     styled_df = (
-        df[['Component', 'Kanji', 'Kanji (Hiragana)', 'Connector', 'Ending', 'Part of Speech']]   
+        df[['Component', 'Kanji', 'Kanji (Hiragana)', 'Connector', 'Ending']]   
         .style.set_properties(
             subset=['Component'],
             **{'background-color': "#fff3b0b2"}
